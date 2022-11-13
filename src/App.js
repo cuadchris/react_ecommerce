@@ -3,6 +3,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "./components/LoginButton";
 import LogoutButton from "./components/LogoutButton";
+import NavBar from "./components/NavBar";
 import SignIn from "./components/SignIn";
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
 
   return (
     <div>
+      <NavBar/>
       {!isAuthenticated ? (
         <div>
           <p style={{ fontSize: "1.5rem" }}>Please Login.</p>
