@@ -17,9 +17,20 @@ function App() {
   useEffect(() => {
     // let clothesObjects = [];
 
+    const getRandomInt = (min, max) => {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+    };
+
     const populateClothes = () => {
-      for (let i = 5; i < 10; i++) {
-        getProduct(i);
+      const ids = [];
+      while (ids.length < 5) {
+        const i = getRandomInt(5, 199);
+        if (!ids.includes(i)) {
+          ids.push(i);
+          getProduct(i);
+        }
       }
     };
 
