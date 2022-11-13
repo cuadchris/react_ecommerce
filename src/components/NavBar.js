@@ -7,13 +7,13 @@ import LogoutButton from "./LogoutButton";
 function NavBar() {
   const { isAuthenticated } = useAuth0();
   return (
-    <nav class="navbar navbar-expand-lg bg-light">
-      <div class="container-fluid">
-        <Link to="/" class="navbar-brand">
+    <nav className="navbar navbar-expand-lg bg-light">
+      <div className="container-fluid">
+        <Link to="/" className="navbar-brand">
           Navbar
         </Link>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
@@ -21,31 +21,31 @@ function NavBar() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <Link to="/" class="nav-link">
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <Link to="/" className="nav-link">
                 Home
               </Link>
             </li>
-            <li class="nav-item">
-              <Link to="/products" class="nav-link">
+            <li className="nav-item">
+              <Link to="/products" className="nav-link">
                 Products
               </Link>
             </li>
-            <li class="nav-item">
-              <Link to="/product" class="nav-link">
+            <li className="nav-item">
+              <Link to="/product" className="nav-link">
                 Product
               </Link>
             </li>
             {!isAuthenticated ? (
-              <li class="nav-item">
+              <li className="nav-item">
                 <LoginButton />
               </li>
             ) : (
-              <li class="nav-item">
+              <li className="nav-item">
                 <LogoutButton />
               </li>
             )}
