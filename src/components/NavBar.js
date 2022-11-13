@@ -1,7 +1,11 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 import { Link } from "react-router-dom";
+import LoginButton from "./LoginButton";
+import LogoutButton from "./LogoutButton";
 
 function NavBar() {
+  const { isAuthenticated } = useAuth0();
   return (
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
@@ -36,11 +40,15 @@ function NavBar() {
                 Product
               </Link>
             </li>
-            <li class="nav-item">
-              <Link to="/signin" class="nav-link">
-                Sign in
-              </Link>
-            </li>
+            {!isAuthenticated ? (
+              <li class="nav-item">
+                <LoginButton />
+              </li>
+            ) : (
+              <li class="nav-item">
+                <LogoutButton />
+              </li>
+            )}
           </ul>
         </div>
       </div>
