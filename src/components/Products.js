@@ -1,9 +1,20 @@
-import React from 'react'
+import React from "react";
 
-function Products() {
+function Products(props) {
+  const objects = props.objects;
   return (
-    <div>Products</div>
-  )
+    <div>
+      {objects.map((item, i) => {
+        return (
+          <div key={i}>
+            <h2>price: {item.price}</h2>
+            <h2>description: {item.description}</h2>
+            <hr />
+          </div>
+        );
+      })}
+    </div>
+  );
 }
 
-export default Products
+export default Products;
