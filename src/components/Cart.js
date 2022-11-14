@@ -8,7 +8,7 @@ function Cart(props) {
             {cart.map((item, i) => {
         return (
           <div key={i}>
-            <p>{JSON.stringify(item)}</p>
+            <p>{JSON.stringify(item.product_id)}</p>
           </div>
         );
       })}
