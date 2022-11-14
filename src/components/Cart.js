@@ -33,12 +33,16 @@ function Cart(props) {
     <div className="container">
       {currentCart.map((item, i) => {
         return (
-          <div key={i}>
+          <div className="my-3" key={i}>
             <p>{JSON.stringify(item.title)}</p>
             <p>${JSON.stringify(item.price)}</p>
+            <button className="btn btn-warning">Remove from cart</button>
           </div>
         );
       })}
+      <div className="container text-center">
+        <button className="btn btn-danger">Delete entire cart</button>
+      </div>
     </div>
   );
 }
