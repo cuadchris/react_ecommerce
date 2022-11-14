@@ -4,7 +4,7 @@ import Product from "./Product";
 function Products(props) {
   const items = props.objects;
   return (
-    <div>
+    <div className="container my-3">
       {items.map((item) => {
         return (
           <div key={item.id}>

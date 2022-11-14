@@ -1,15 +1,17 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import { addDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { colRef } from "./firebase";
 
 function ProductDetails() {
   const { id } = useParams();
-  const [item, SetItem] = useState();
   const [image, setImage] = useState();
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
   const [price, setPrice] = useState();
-  const { isAuthenticated } = useAuth0()
+  const [productId, setProductId] = useState();
+  const { isAuthenticated, user } = useAuth0();
 
   useEffect(() => {
     const getItem = async () => {
@@ -18,6 +20,7 @@ function ProductDetails() {
       );
       const data = await response.json();
       setTitle(data.title);
+      setProductId(data.id);
       setDescription(data.description);
       setImage(data.category.image);
       setPrice(data.price);
@@ -25,7 +28,14 @@ function ProductDetails() {
     getItem();
   }, []);
 
-  //   {JSON.stringify(item.image)} !!!!!!!!!!
+  const addToCart = () => {
+    addDoc(colRef, {
+      user_id: user.email,
+      product_id: productId,
+    });
+    // alert("Item added.");
+  };
+
   return (
     <div className="container text-center my-5">
       <div className="row">
@@ -37,11 +47,12 @@ function ProductDetails() {
           <p className="my-5">{description}</p>
           <p className="my-5">${price}.99</p>
           {isAuthenticated ? (
-            <button className="btn btn-primary">Add to Cart</button>
-          ):(
+            <button onClick={addToCart} className="btn btn-primary">
+              Add to Cart
+            </button>
+          ) : (
             <small className="text-muted"> Sign in to add to cart</small>
           )}
-          
         </div>
       </div>
     </div>

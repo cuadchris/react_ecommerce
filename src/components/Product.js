@@ -5,11 +5,9 @@ function Product(props) {
   const item = props.item;
   return (
     <div>
-      <h4>price: {item.price}</h4>
-      <h4>description: {item.description}</h4>
-      <h4>id: {item.id}</h4>
+      <h4>{item.title}</h4>
       <Link to={`/product/${item.id}`}>
-        <button>see item</button>
+        <button className="btn btn-warning">See Item</button>
       </Link>
       <hr />
     </div>

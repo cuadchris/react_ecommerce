@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 
-function NavBar() {
+function NavBar(props) {
+  const cart = props.length
   const { isAuthenticated } = useAuth0();
   return (
     <nav className="navbar navbar-expand-lg bg-light">
@@ -45,16 +46,18 @@ function NavBar() {
                   <LogoutButton />
                 </li>
                 <li className="nav-item mx-5 my-1 fa-lg">
+                  <Link to='/cart'>
                   <button
                     type="button"
-                    class="btn btn-primary position-relative"
+                    className="btn btn-primary position-relative"
                   >
-                    <i class="fa-solid fa-bag-shopping"></i>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                      3
+                    <i className="fa-solid fa-bag-shopping"></i>
+                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                      {cart}
                     </span>
                   </button>
-                  {/* <i class="fa-solid fa-bag-shopping"></i> */}
+                  </Link>
+                  {/* <i className="fa-solid fa-bag-shopping"></i> */}
                 </li>
               </>
             )}

@@ -11,12 +11,31 @@ import NavBar from "./components/NavBar";
 import SignIn from "./components/SignIn";
 import { React, useEffect, useState } from "react";
 import ProductDetails from "./components/ProductDetails";
+import { getDocs, onSnapshot } from "firebase/firestore";
+import { colRef } from "./components/firebase";
+import Cart from "./components/Cart";
 
 function App() {
   const [objects, setObjects] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-    // let clothesObjects = [];
+    // getDocs(colRef).then((snapshot) => {
+    //   let items = [];
+    //   snapshot.docs.forEach((doc) => {
+    //     items.push({ ...doc.data(), id: doc.id });
+    //     setCartItems((prev) => [...prev, doc.data()]);
+    //   });
+    // });
+
+    onSnapshot(colRef, (snapshot) => {
+      let items = [];
+      snapshot.docs.forEach((doc) => {
+        items.push({ ...doc.data(), id: doc.id });
+        // setCartItems([doc.data()]);
+      });
+      setCartItems(items)
+    })
 
     const getRandomInt = (min, max) => {
       min = Math.ceil(min);
@@ -41,6 +60,7 @@ function App() {
       );
       const data = await response.json();
       const obj = {
+        title: data.title,
         id: data.id,
         price: data.price,
         pic: data.category.image,
@@ -53,13 +73,14 @@ function App() {
 
   return (
     <div>
-      <NavBar />
+      <NavBar length = {cartItems.length} />
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="products" element={<Products objects={objects} />}></Route>
         {/* <Route path="product" element={<Product />}></Route> */}
         <Route path="signin" element={<SignIn />}></Route>
-        <Route path="product/:id" element={<ProductDetails/>}></Route>
+        <Route path="cart" element={<Cart cartItems={cartItems} />}></Route>
+        <Route path="product/:id" element={<ProductDetails />}></Route>
       </Routes>
     </div>
   );
