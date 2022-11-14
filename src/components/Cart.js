@@ -6,6 +6,7 @@ function Cart(props) {
 
   useEffect(() => {
     populateCart();
+    // eslint-disable-next-line
   }, []);
 
   const populateCart = () => {
