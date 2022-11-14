@@ -4,12 +4,13 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Products from "./components/Products";
-import Product from "./components/Product";
+// import Product from "./components/Product";
 // import LoginButton from "./components/LoginButton";
 // import LogoutButton from "./components/LogoutButton";
 import NavBar from "./components/NavBar";
 import SignIn from "./components/SignIn";
 import { React, useEffect, useState } from "react";
+import ProductDetails from "./components/ProductDetails";
 
 function App() {
   const [objects, setObjects] = useState([]);
@@ -40,6 +41,7 @@ function App() {
       );
       const data = await response.json();
       const obj = {
+        id: data.id,
         price: data.price,
         pic: data.category.image,
         description: data.description,
@@ -55,8 +57,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="products" element={<Products objects={objects} />}></Route>
-        <Route path="product" element={<Product />}></Route>
+        {/* <Route path="product" element={<Product />}></Route> */}
         <Route path="signin" element={<SignIn />}></Route>
+        <Route path="product/:id" element={<ProductDetails/>}></Route>
       </Routes>
     </div>
   );

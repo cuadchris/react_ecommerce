@@ -1,15 +1,14 @@
 import React from "react";
+import Product from "./Product";
 
 function Products(props) {
-  const objects = props.objects;
+  const items = props.objects;
   return (
     <div>
-      {objects.map((item, i) => {
+      {items.map((item) => {
         return (
-          <div key={i}>
-            <h2>price: {item.price}</h2>
-            <h2>description: {item.description}</h2>
-            <hr />
+          <div key={item.id}>
+            <Product item={item}/>
           </div>
         );
       })}
